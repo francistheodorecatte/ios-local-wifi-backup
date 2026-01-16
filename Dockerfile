@@ -61,5 +61,9 @@ RUN git clone https://github.com/fosple/usbmuxd2.git \
   && make \
   && make install
 
+RUN rm -r ./*
+
+WORKDIR /root
 COPY backup.sh .
 COPY setup.sh .
+RUN chmod +x *.sh

@@ -15,20 +15,19 @@ to build and start the container for the first time, clone the repo then do:
 ```sh
 mkdir -p ~/.local/lockdown
 podman build -t ios-local-backup -f ./Dockerfile
-podman run -it --rm --privileged --v /mnt/ios-backups:/backup -v /home/<user>/.local/lockdown:/var/lib/lockdown --network=host localhost/ios-local-backup setup.sh
 ```
 
-note that this should work with docker, if you prefer that over systemd-podman.
+note that this should work with docker (podman is a completely open-source, direct drop-in for it), if you prefer that over systemd-podman.
 
 `--network=host --privileged` are required here so that USB and networking works properly
 
-to setup, first make sure wifi sync is enabled via a mac/windows machine in the iphone's settings (via iTunes)
+to setup, first make sure wifi sync is enabled via a mac/windows machine in the iphone's settings (via iTunes), then plug iphone in via usb, run `setup.sh` in the docker container and pair the iphone. this creates the two required plist files in `lockdown` — you should verify they're there afterwards: a uuid.plist and a SystemConfiguration.plist. e.g.:
 
-then plug iphone in via usb, run `/src/setup.sh` in the docker container and pair the iphone, this creates the required plist files in `lockdown`
+```sh
+podman run -it --rm --privileged --v /mnt/ios-backups:/backup -v /home/<user>/.local/lockdown:/var/lib/lockdown --network=host localhost/ios-local-backup setup.sh
+```
 
-you should verify they're there afterwards, you should have two files, a uuid.plist and a SystemConfiguration.plist file in the lockdown folder
-
-without iphone plugged in via usb anymore, run `/src/backup.sh <iphone ip>` in the container to backup remotely, you can run this as one command from the host:
+without iphone plugged in via usb anymore, run `backup.sh <iphone ip>` in the container to backup remotely. you can run this as one command from the host:
 
 ```sh
 podman run -it --rm --privileged --v /mnt/ios-backups:/backup -v /home/<user>/.local/lockdown:/var/lib/lockdown --network=host localhost/ios-local-backup backup.sh <ip>

@@ -63,7 +63,7 @@ RUN git clone https://github.com/fosple/usbmuxd2.git \
 
 RUN rm -r ./*
 
-WORKDIR /root
+WORKDIR /usr/local/bin
 COPY backup.sh .
 COPY setup.sh .
 RUN chmod +x *.sh

@@ -21,7 +21,7 @@ note that this should work with docker (podman is a completely open-source, dire
 
 `--network=host --privileged` and the udev rules are required here so that USB and networking works properly.
 
-for first-time setup, make sure wifi sync is enabled via a mac/windows machine in the iPhone/iPad's settings (via iTunes), then plug iphone in via usb, run `setup.sh` in the docker container and pair the iphone. this creates the two required plist files in `lockdown`. note the filename of the new plist other than `SystemConfiguration.plist`; this is the UUID of your device which will be needed in the next step:
+for first-time setup, make sure wifi sync is enabled via a mac/windows machine in the iPhone/iPad's settings (via iTunes), then plug iphone in via usb, run `setup.sh` in the docker container and pair the iphone. note the filename of the new plist other than `SystemConfiguration.plist` in the `lockdown` folder; this is the UUID of your device which will be needed in the next step:
 
 ```sh
 podman run -it --rm --privileged --v /mnt/ios-backups:/backup -v /home/<user>/.local/lockdown:/var/lib/lockdown --network=host localhost/ios-local-backup setup.sh

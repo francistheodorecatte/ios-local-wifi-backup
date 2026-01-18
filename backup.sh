@@ -1,6 +1,7 @@
 #!/bin/bash
-# usage: backup.sh <UUID> <IP>
+set -e
 
+# usage: backup.sh <UUID> <IP>
 if [ -z "$1" ]; then
         echo "no device UUID provided!" >&2
         exit 1

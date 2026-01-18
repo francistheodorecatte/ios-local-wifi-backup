@@ -17,7 +17,7 @@ mkdir -p ~/.local/lockdown
 podman build -t ios-local-backup -f ./Dockerfile
 ```
 
-note that this should work with docker (podman is a completely open-source, direct drop-in for it), if you prefer that over systemd-podman, and currently only supports one device at a time. there will likely be a script rewrite to support specifying a device uuid to support multiple iOS devices.
+note that this should work with docker like the original, unforked version (podman is a completely open-source, direct drop-in for it), if you prefer that over systemd-podman.
 
 `--network=host --privileged` and the udev rules are required here so that USB and networking works properly.
 

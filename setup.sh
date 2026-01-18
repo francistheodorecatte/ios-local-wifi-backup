@@ -15,6 +15,6 @@ if [ -f "/var/lib/lockdown/$UUID.plist" ]; then
         echo -e "\nNewly paired device ID is: $UUID"
         exit 0
 else
-        echo -e "\nideviceinfo failed to create device plist (did pairing fail?)"
+        echo -e "\nusbmuxd failed to create device plist (did pairing fail?)"
         exit 1
 fi

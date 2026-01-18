@@ -21,7 +21,7 @@ note that this should work with docker like the original, unforked version (podm
 
 `--network=host --privileged` and the udev rules are required here so that USB and networking works properly.
 
-for first-time setup, make sure wifi sync is enabled via a mac/windows machine in the iPhone/iPad's settings (via iTunes), then plug iphone in via usb, run `setup.sh` in the docker container and pair the iphone. note the UUID printed at the end of the script; this is the UUID of your device which will be needed in the next step:
+for first-time setup, make sure wifi sync is enabled via a mac/windows machine in the iPhone/iPad's settings (the `Sync with this device over Wi-Fi` checkbox in iTunes), then plug iphone in via usb, run `setup.sh` in the docker container and pair the iphone. note the UUID printed at the end of the script; this is the UUID of your device which will be needed in the next step:
 
 ```sh
 podman run -it --rm --privileged --network=host -v /mnt/ios-backups:/backup -v /home/<user>/.local/lockdown:/var/lib/lockdown localhost/ios-local-backup setup.sh
@@ -32,5 +32,7 @@ with the iPhone/iPad unplugged from your host machine, run `backup.sh <UUID> <ip
 ```sh
 podman run -it --rm --privileged --network=host -v /mnt/ios-backups:/backup -v /home/<user>/.local/lockdown:/var/lib/lockdown localhost/ios-local-backup backup.sh <UUID> <ip>
 ```
+
+if your device is not setup for wireless syncing, the script will spit out `ERROR: Could not connect to lockdownd, error code -8`!
 
 you can setup a 'Shortcut' on iOS that grabs the phones local ip address and passes it to an ssh command to avoid setting a static ip on your iPhone/iPad.

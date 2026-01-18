@@ -36,7 +36,7 @@ fi
 echo "UUID plist: $uuid_plist"
 echo "SystemConfiguration.plist found: $system_config_plist"
 
-usbmuxd -c $IP_ADDRESS --pair-record-id $uuid_plist &
+usbmuxd -d -z --allow-heartless-wifi -c $IP_ADDRESS --pair-record-id $uuid_plist &
 PID=$!
 
 sleep 2
